@@ -82,5 +82,3 @@ Consolidate shared logic into a reusable core module
 Author
 Ting  — transitioning from regulated, rule-intensive systems into applied ML and systems work.
 
-yaml
-Copy code
