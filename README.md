@@ -31,7 +31,6 @@ Prototype application for comparing two normalized trial balances.
 - Generate a summary report and exceptions list
 
 ---
----
 
 ## Processing Flow (Required Order)
 
@@ -45,6 +44,8 @@ This project assumes a **strict processing order**:
 
 The comparison tool is **not designed to operate directly on raw TB exports**.  
 This separation ensures consistency, explainability, and safer downstream analysis.
+
+---
 
 ## How to run locally
 
@@ -79,4 +80,7 @@ Consolidate shared logic into a reusable core module
 (Planned) Explore ML-based classification for ambiguous mappings with strict rule-based fallbacks
 
 Author
-Ting  — transitioning from regulated, rule-intensive systems into applied ML and systems work.
+Ting — transitioning from regulated, rule-intensive systems into applied ML and systems work.
+
+markdown
+Copy code
