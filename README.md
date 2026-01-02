@@ -1,68 +1,81 @@
-# Trial Balance Tools
+ Trial Balance Tools
 
-A pair of prototype tools for working with messy trial balance (TB) data commonly encountered in accounting and audit workflows.
+This repository contains two small web prototypes for working with messy trial balance (TB) data commonly encountered in accounting and audit workflows.
 
-- **tb-mapping/**: Clean and normalize raw TB exports into a consistent, auditable schema  
-- **tb-compare/**: Compare two TB periods (e.g., year-over-year) to surface deltas and exceptions
+- **tb-mapping/**: Clean and normalize raw TB exports into a consistent schema
+- **tb-compare/**: Compare two TB periods (e.g., year-over-year) and highlight differences
 
-The system is designed with **explainability and human oversight** in mind — ambiguous cases are flagged for review rather than silently resolved.
+Each tool is a **standalone web app** built with React, Vite, and TypeScript.  
+They are run **locally on your machine**, one at a time.
 
-> Note: This repository contains only synthetic/sample data. No client data or secrets are included.
-
----
-
-## Repository structure
-
-### `tb-mapping/`
-Prototype application for normalizing raw trial balance exports.
-
-**Focus areas**
-- Detect and standardize inconsistent column formats
-- Clean account numbers and descriptions
-- Produce a consistent schema suitable for downstream analysis
-- Flag rows requiring manual review
-
-### `tb-compare/`
-Prototype application for comparing two normalized trial balances.
-
-**Focus areas**
-- Match accounts across periods using rule-based logic
-- Compute deltas and identify new / removed / changed accounts
-- Generate a summary report and exceptions list
+> Note: This project contains only synthetic/sample data. No client data or secrets are included.
 
 ---
 
-## How to run locally (prototype)
+## Project structure
 
-Each folder is a standalone web prototype.
+trial-balance-tools/
+├─ tb-mapping/ # Trial balance cleaning & normalization
+├─ tb-compare/ # Trial balance comparison
+├─ README.md
+
+yaml
+Copy code
+
+---
+
+## How to run locally (step by step)
+
+### Prerequisites
+- Install **Node.js** (includes npm): https://nodejs.org  
+  After installation, confirm in a terminal:
+node -v
+npm -v
+
+yaml
+Copy code
+
+---
+
+### Step 1: Clone the repository
+
+Open a terminal and run:
 
 ```bash
-# Mapping tool
+git clone https://github.com/drunkoctopuses/trial-balance-tools.git
+cd trial-balance-tools
+Step 2: Run the TB Mapping tool
+bash
+Copy code
 cd tb-mapping
 npm install
 npm run dev
+After running npm run dev, the terminal will print a local URL, usually:
 
-# Comparison tool
-cd tb-compare
+arduino
+Copy code
+http://localhost:5173
+Open that URL in your browser to use the TB Mapping tool.
+
+Step 3: Run the TB Comparison tool
+Stop the previous app (Ctrl + C), then:
+
+bash
+Copy code
+cd ../tb-compare
 npm install
 npm run dev
-Design principles
-Explainability first: decisions should be inspectable and auditable
+Open the URL shown in the terminal (again, usually http://localhost:5173) to use the TB Comparison tool.
 
-Human-in-the-loop: ambiguous cases are surfaced, not hidden
+Notes
+Each tool runs independently.
 
-Robust to messy inputs: designed for real-world TB exports
+Only one tool should be running at a time unless you change the port.
 
-Iterative by design: structured to evolve into hybrid rule + ML workflows
-
-Limitations and next steps
-Add sample input/output files for quick demonstration
-
-Add basic tests around core normalization and comparison logic
-
-Consolidate shared logic into a reusable core module
-
-(Planned) Introduce optional AI assistance for ambiguous cases with clear boundaries
+AI-assisted features are experimental and optional; basic functionality runs without any API keys.
 
 Author
 Ting (CPA) — transitioning from regulated, rule-intensive systems into applied ML and systems work.
+
+yaml
+Copy code
