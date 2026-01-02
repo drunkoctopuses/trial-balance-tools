@@ -31,6 +31,20 @@ Prototype application for comparing two normalized trial balances.
 - Generate a summary report and exceptions list
 
 ---
+---
+
+## Processing Flow (Required Order)
+
+This project assumes a **strict processing order**:
+
+1. **Mapping first**  
+   Raw trial balance exports are cleaned, normalized, and validated using `tb-mapping/`.
+
+2. **Comparison second**  
+   Only normalized outputs produced by the mapping step should be used as inputs to `tb-compare/`.
+
+The comparison tool is **not designed to operate directly on raw TB exports**.  
+This separation ensures consistency, explainability, and safer downstream analysis.
 
 ## How to run locally
 
