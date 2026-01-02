@@ -1,0 +1,5 @@
+{
+  "name": "Professional TB Mapping Engine",
+  "description": "An AI-powered Trial Balance cleaning and mapping tool for accountants. Standardize raw Excel data into professional TBs with account cleaning, automated mapping, and balance validation.",
+  "requestFramePermissions": []
+}
