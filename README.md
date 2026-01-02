@@ -47,7 +47,6 @@ cd tb-compare
 npm install
 npm run dev
 Design principles
-
 Explainability first: decisions should be inspectable and auditable
 
 Human-in-the-loop: ambiguous cases are surfaced, not hidden
@@ -57,7 +56,6 @@ Robust to messy inputs: designed for real-world TB exports
 Iterative by design: structured to evolve into hybrid rule + ML workflows
 
 Limitations and next steps
-
 Add sample input/output files for quick demonstration
 
 Add basic tests around core normalization and comparison logic
@@ -67,5 +65,4 @@ Consolidate shared logic into a reusable core module
 (Planned) Introduce optional AI assistance for ambiguous cases with clear boundaries
 
 Author
-
 Ting (CPA) — transitioning from regulated, rule-intensive systems into applied ML and systems work.
