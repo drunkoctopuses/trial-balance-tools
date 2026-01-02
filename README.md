@@ -1,81 +1,68 @@
- Trial Balance Tools
+# Trial Balance Tools
 
-This repository contains two small web prototypes for working with messy trial balance (TB) data commonly encountered in accounting and audit workflows.
+A pair of prototype tools for working with messy trial balance (TB) data commonly encountered in accounting and audit workflows.
 
-- **tb-mapping/**: Clean and normalize raw TB exports into a consistent schema
-- **tb-compare/**: Compare two TB periods (e.g., year-over-year) and highlight differences
+- **tb-mapping/**: Clean and normalize raw TB exports into a consistent, auditable schema  
+- **tb-compare/**: Compare two TB periods (e.g., year-over-year) to surface deltas and exceptions
 
-Each tool is a **standalone web app** built with React, Vite, and TypeScript.  
-They are run **locally on your machine**, one at a time.
+The system is designed with **explainability and human oversight** in mind — ambiguous cases are flagged for review rather than silently resolved.
 
-> Note: This project contains only synthetic/sample data. No client data or secrets are included.
-
----
-
-## Project structure
-
-trial-balance-tools/
-├─ tb-mapping/ # Trial balance cleaning & normalization
-├─ tb-compare/ # Trial balance comparison
-├─ README.md
-
-yaml
-Copy code
+> Note: This repository contains only synthetic/sample data. No client data or secrets are included.
 
 ---
 
-## How to run locally (step by step)
+## Repository structure
 
-### Prerequisites
-- Install **Node.js** (includes npm): https://nodejs.org  
-  After installation, confirm in a terminal:
-node -v
-npm -v
+### `tb-mapping/`
+Prototype application for normalizing raw trial balance exports.
 
-yaml
-Copy code
+**Focus areas**
+- Detect and standardize inconsistent column formats
+- Clean account numbers and descriptions
+- Produce a consistent schema suitable for downstream analysis
+- Flag rows requiring manual review
+
+### `tb-compare/`
+Prototype application for comparing two normalized trial balances.
+
+**Focus areas**
+- Match accounts across periods using rule-based logic
+- Compute deltas and identify new / removed / changed accounts
+- Generate a summary report and exceptions list
 
 ---
 
-### Step 1: Clone the repository
+## How to run locally
 
-Open a terminal and run:
+Each folder is a standalone web prototype.
 
 ```bash
-git clone https://github.com/drunkoctopuses/trial-balance-tools.git
-cd trial-balance-tools
-Step 2: Run the TB Mapping tool
-bash
-Copy code
+# Mapping tool
 cd tb-mapping
 npm install
 npm run dev
-After running npm run dev, the terminal will print a local URL, usually:
 
-arduino
-Copy code
-http://localhost:5173
-Open that URL in your browser to use the TB Mapping tool.
-
-Step 3: Run the TB Comparison tool
-Stop the previous app (Ctrl + C), then:
-
-bash
-Copy code
-cd ../tb-compare
+# Comparison tool
+cd tb-compare
 npm install
 npm run dev
-Open the URL shown in the terminal (again, usually http://localhost:5173) to use the TB Comparison tool.
+Design principles
+Explainability first: decisions should be inspectable and auditable
 
-Notes
-Each tool runs independently.
+Human-in-the-loop: ambiguous cases are surfaced, not hidden
 
-Only one tool should be running at a time unless you change the port.
+Robust to messy inputs: designed for real-world TB exports
 
-AI-assisted features are experimental and optional; basic functionality runs without any API keys.
+Iterative by design: structured to evolve into hybrid rule + ML workflows
+
+Limitations and next steps
+Add sample input/output files for quick demonstration
+
+Add basic tests around core normalization and comparison logic
+
+Consolidate shared logic into a reusable core module
+
+(Planned) Explore ML-based classification for ambiguous mappings with strict rule-based fallbacks
 
 Author
-Ting (CPA) — transitioning from regulated, rule-intensive systems into applied ML and systems work.
-
-yaml
-Copy code
+Ting  — transitioning from regulated, rule-intensive systems into applied ML and systems work.
