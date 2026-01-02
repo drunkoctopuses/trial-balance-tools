@@ -80,7 +80,7 @@ Consolidate shared logic into a reusable core module
 (Planned) Explore ML-based classification for ambiguous mappings with strict rule-based fallbacks
 
 Author
-Ting — transitioning from regulated, rule-intensive systems into applied ML and systems work.
+Ting  — transitioning from regulated, rule-intensive systems into applied ML and systems work.
 
-markdown
+yaml
 Copy code
