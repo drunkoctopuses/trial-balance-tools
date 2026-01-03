@@ -36,8 +36,6 @@ trial-balance-tools/
 ├─ sample_data/ # Example Excel inputs and outputs (end-to-end)
 └─ README.md
 
-yaml
-Copy code
 
 ---
 
