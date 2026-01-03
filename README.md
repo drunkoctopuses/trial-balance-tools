@@ -2,21 +2,46 @@
 
 A pair of prototype tools for working with messy trial balance (TB) data commonly encountered in accounting and audit workflows.
 
-- **tb-mapping/**: Clean and normalize raw TB exports into a consistent, auditable schema  
-- **tb-compare/**: Compare two TB periods (e.g., year-over-year) to surface deltas and exceptions
-
-The system is designed with **explainability and human oversight** in mind — ambiguous cases are flagged for review rather than silently resolved.
-
-> Note: This repository contains only synthetic/sample data. No client data or secrets are included.
+This repository demonstrates a **two-stage, rule-driven processing pipeline** designed with explainability, auditability, and human oversight as first-class concerns.
 
 ---
 
-## Repository structure
+## Overview
+
+The system consists of two independent but **sequential** tools:
+
+- **`tb-mapping/`**  
+  Cleans and normalizes raw trial balance exports into a consistent, auditable schema.
+
+- **`tb-compare/`**  
+  Compares two *normalized* trial balances (e.g. year-over-year) to surface deltas, additions, removals, and material changes.
+
+> ⚠️ **Important design constraint:**  
+> The comparison step assumes inputs have already been normalized by the mapping step.  
+> **Raw trial balance data must be processed by `tb-mapping` before it can be used by `tb-compare`.**
+
+Ambiguous or high-impact cases are intentionally **flagged for human review**, rather than silently resolved.
+
+> **Note:** This repository contains only synthetic/sample data.  
+> No client data or confidential information is included.
+
+---
+
+## Repository Structure
+
+trial-balance-tools/
+├─ tb-mapping/ # Normalize raw trial balance exports
+├─ tb-compare/ # Compare normalized trial balances
+├─ sample_data/ # Example Excel inputs and outputs (end-to-end)
+└─ README.md
+
+yaml
+Copy code
 
 ### `tb-mapping/`
 Prototype application for normalizing raw trial balance exports.
 
-**Focus areas**
+Focus areas:
 - Detect and standardize inconsistent column formats
 - Clean account numbers and descriptions
 - Produce a consistent schema suitable for downstream analysis
@@ -25,31 +50,49 @@ Prototype application for normalizing raw trial balance exports.
 ### `tb-compare/`
 Prototype application for comparing two normalized trial balances.
 
-**Focus areas**
-- Match accounts across periods using rule-based logic
-- Compute deltas and identify new / removed / changed accounts
-- Generate a summary report and exceptions list
+Focus areas:
+- Account-level matching across periods
+- Detection of new, removed, and changed balances
+- Generation of a comparison report for review
 
 ---
 
 ## Processing Flow (Required Order)
 
-This project assumes a **strict processing order**:
+The intended usage follows this strict sequence:
 
-1. **Mapping first**  
-   Raw trial balance exports are cleaned, normalized, and validated using `tb-mapping/`.
+1. **Raw trial balance exports**  
+2. **Mapping step (`tb-mapping`)**  
+   → produces normalized trial balance files  
+3. **Comparison step (`tb-compare`)**  
+   → produces a comparison report based on mapped outputs
 
-2. **Comparison second**  
-   Only normalized outputs produced by the mapping step should be used as inputs to `tb-compare/`.
-
-The comparison tool is **not designed to operate directly on raw TB exports**.  
-This separation ensures consistency, explainability, and safer downstream analysis.
+The comparison tool is **not designed** to operate directly on raw trial balance exports.
 
 ---
 
-## How to run locally
+## Sample Data (End-to-End Example)
 
-Each folder is a standalone web prototype.
+The `sample_data/` folder contains a complete, realistic example of the intended workflow:
+
+- `raw_tb_period1.xlsx`  
+- `raw_tb_period2.xlsx`  
+  → Example raw trial balance exports
+
+- `mapped_tb_period1.xlsx`  
+- `mapped_tb_period2.xlsx`  
+  → Outputs produced by the mapping step
+
+- `comparison_report.xlsx`  
+  → Output produced by comparing the two mapped trial balances
+
+These files are provided to illustrate the **mapping → comparison** pipeline using Excel-based inputs and outputs.
+
+---
+
+## How to Run Locally (Optional)
+
+Each tool is a standalone prototype application.
 
 ```bash
 # Mapping tool
@@ -61,24 +104,30 @@ npm run dev
 cd tb-compare
 npm install
 npm run dev
-Design principles
-Explainability first: decisions should be inspectable and auditable
+Running the applications locally is not required to understand the design.
+This section exists to document that the prototypes are runnable.
 
-Human-in-the-loop: ambiguous cases are surfaced, not hidden
+Design Principles
+Explainability first
+Decisions should be inspectable and auditable.
 
-Robust to messy inputs: designed for real-world TB exports
+Human-in-the-loop
+Ambiguous cases are surfaced, not hidden.
 
-Iterative by design: structured to evolve into hybrid rule + ML workflows
+Robust to messy inputs
+Designed for real-world trial balance exports.
 
-Limitations and next steps
-Add sample input/output files for quick demonstration
+Iterative by design
+Structured to evolve into hybrid rule-based + ML workflows.
 
-Add basic tests around core normalization and comparison logic
+Limitations and Next Steps
+Add automated tests around core normalization and comparison logic
 
 Consolidate shared logic into a reusable core module
 
-(Planned) Explore ML-based classification for ambiguous mappings with strict rule-based fallbacks
+Improve documentation of assumptions and edge cases
+
+(Planned) Explore ML-assisted classification for ambiguous mappings, with strict rule-based fallbacks
 
 Author
-Ting  — transitioning from regulated, rule-intensive systems into applied ML and systems work.
-
+Ting — transitioning from regulated, rule-intensive systems into applied ML and systems work, with a focus on safe, interpretable automation in high-consequence domains.
