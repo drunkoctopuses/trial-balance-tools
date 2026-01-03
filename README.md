@@ -2,7 +2,7 @@
 
 A pair of prototype tools for working with messy trial balance (TB) data commonly encountered in accounting and audit workflows.
 
-This repository demonstrates a **two-stage, rule-driven processing pipeline** designed with explainability, auditability, and human oversight as first-class concerns.
+This repository demonstrates a **two-stage, rule-driven processing pipeline** designed with **explainability, auditability, and human oversight** as first-class concerns.
 
 ---
 
@@ -14,15 +14,16 @@ The system consists of two independent but **sequential** tools:
   Cleans and normalizes raw trial balance exports into a consistent, auditable schema.
 
 - **`tb-compare/`**  
-  Compares two *normalized* trial balances (e.g. year-over-year) to surface deltas, additions, removals, and material changes.
+  Compares two **normalized** trial balances (e.g. year-over-year) to surface deltas, additions, removals, and material changes.
 
-> ⚠️ **Important design constraint:**  
+> ⚠️ **Important design constraint**  
 > The comparison step assumes inputs have already been normalized by the mapping step.  
 > **Raw trial balance data must be processed by `tb-mapping` before it can be used by `tb-compare`.**
 
 Ambiguous or high-impact cases are intentionally **flagged for human review**, rather than silently resolved.
 
-> **Note:** This repository contains only synthetic/sample data.  
+> **Note**  
+> This repository contains only synthetic/sample data.  
 > No client data or confidential information is included.
 
 ---
@@ -38,32 +39,15 @@ trial-balance-tools/
 yaml
 Copy code
 
-### `tb-mapping/`
-Prototype application for normalizing raw trial balance exports.
-
-Focus areas:
-- Detect and standardize inconsistent column formats
-- Clean account numbers and descriptions
-- Produce a consistent schema suitable for downstream analysis
-- Flag rows requiring manual review
-
-### `tb-compare/`
-Prototype application for comparing two normalized trial balances.
-
-Focus areas:
-- Account-level matching across periods
-- Detection of new, removed, and changed balances
-- Generation of a comparison report for review
-
 ---
 
 ## Processing Flow (Required Order)
 
 The intended usage follows this strict sequence:
 
-1. **Raw trial balance exports**  
+1. **Raw trial balance exports**
 2. **Mapping step (`tb-mapping`)**  
-   → produces normalized trial balance files  
+   → produces normalized trial balance files
 3. **Comparison step (`tb-compare`)**  
    → produces a comparison report based on mapped outputs
 
@@ -86,7 +70,7 @@ The `sample_data/` folder contains a complete, realistic example of the intended
 - `comparison_report.xlsx`  
   → Output produced by comparing the two mapped trial balances
 
-These files are provided to illustrate the **mapping → comparison** pipeline using Excel-based inputs and outputs.
+These files illustrate the full **mapping → comparison** pipeline using Excel-based inputs and outputs.
 
 ---
 
@@ -104,8 +88,8 @@ npm run dev
 cd tb-compare
 npm install
 npm run dev
-Running the applications locally is not required to understand the design.
-This section exists to document that the prototypes are runnable.
+Running the applications locally is not required to understand the system design.
+This section exists only to document that the prototypes are runnable.
 
 Design Principles
 Explainability first
@@ -131,3 +115,6 @@ Improve documentation of assumptions and edge cases
 
 Author
 Ting — transitioning from regulated, rule-intensive systems into applied ML and systems work, with a focus on safe, interpretable automation in high-consequence domains.
+
+yaml
+Copy code
